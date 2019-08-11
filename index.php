@@ -36,7 +36,7 @@ $myname = "chinedu";
 $link = mysql_connect("localhost",'root','');
 //var_dump($link);
 
-$file = fopen('text.txt','w');
+//$file = fopen('text.txt','w');
 //var_dump($file);
 echo strlen("welcome $myname").'<br>';  // checking the length of a string
 echo "<h1>".str_word_count('chinedu is learning php in a bit')."</h1><br>"; //check the number of words in a string
@@ -104,6 +104,37 @@ echo base_convert($num,10,16)."<br>";
 
 $dateTry = date("D d,m/Y h:i:A");
 echo $dateTry;
+
+echo date("F d, Y h:i:s A")."<br>";
+
+$time = 1394003958;
+
+echo date($time)."<br>";
+
+
+$timestamp = time();
+echo($timestamp)."<br>";
+
+
+// file manipulation;
+
+$text = "text.txt";
+if(file_exists($text)){
+  //echo "file  exist";
+
+  $open = fopen($text,"r") or die("error opening file");
+  
+  $content= fread($open,filesize($text));
+ 
+  //echo $content."<br>";
+
+   readfile($text);
+  //echo  strlen($content);
+  fclose($open);
+}else{
+  //echo " no such files";
+}
+
 
 
 ?>
