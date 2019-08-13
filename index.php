@@ -128,12 +128,62 @@ if(file_exists($text)){
  
   //echo $content."<br>";
 
-   readfile($text);
+   readfile($text)."<br>";
   //echo  strlen($content);
   fclose($open);
 }else{
   //echo " no such files";
 }
+
+//rename($file, "newfile.txt"); //renaming file;
+//unlink($filename); // deleting file;
+
+// making directory;
+$dirName = "assets";
+
+if(!file_exists($dirName)){
+  if(mkdir($dirName)){
+    echo "the $dirName was created"."<br>";
+  }
+}else{
+  echo "$dirName already exist"."<br>";
+}
+
+ session_start();
+ $_SESSION['name'] ="chinedu";
+
+ echo " $_SESSION[name]";
+
+ //trying mail function
+
+ $to ="okoriechinedusunday@gmail.com";
+ $subject="trying  inbuilt mail function of php";
+ $msg ="welcome chinedu";
+ $from = "chinedusundayokorie@gmail.com";
+ if(mail($to,$subject,$msg,$from)){
+   echo "mail sent";
+
+ }else{
+   echo "something went wrong";
+ }
+
+ $myName = "chin  3212edu";
+ $valid = filter_var(trim($myName),FILTER_SANITIZE_STRING);
+ echo $valid."<br>";
+/// json manipulation
+ $myArr = array("chinedu",1,true,);
+ $json = json_encode($myArr);
+ echo $json."<br>";
+
+ $myObj = array("name"=>"chinedu", "age"=> 25, "isSingle"=>true);
+ $jsonObj = json_encode($myObj);
+
+ echo $jsonObj;
+ $jsonObject ='{"name":"chinedu","age":25,"isSingle":true}';
+
+var_dump( json_decode($jsonObject));
+
+
 
 
 
