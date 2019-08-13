@@ -178,15 +178,120 @@ if(!file_exists($dirName)){
  $myObj = array("name"=>"chinedu", "age"=> 25, "isSingle"=>true);
  $jsonObj = json_encode($myObj);
 
- echo $jsonObj;
+ echo $jsonObj."<br>";
  $jsonObject ='{"name":"chinedu","age":25,"isSingle":true}';
 
-var_dump( json_decode($jsonObject));
+var_dump( json_decode($jsonObject))."<br>";
+
+// regular expression
+$reg ="oki";
+$regExp = "/[chi]/";
+if(preg_match($regExp,$reg)){
+  echo "match"."<br>";
+}else{
+  echo "no match"."<br>";
+}
+
+// db connections using mysqli and PDO;
+
+//$connect = mysqli_connect("localhost","root","","phptutdb");
+// try{
+//   $pdo = new PDO("mysql:host=localhost; dbname=phptutdb","root",""); // connecting to db;
+//   $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO:: ERRMODE_EXCEPTION); //setting the error mode to exception;
+//   echo "connected";
 
 
+// }catch(PDOException $err){
+//   die("Error: ". $err->getMessage());
+// }
+
+// unset($pdo);
+
+require_once('dbcon.php');
+
+try{
+  $sql ="USE pdodb";
+  $pdo->exec($sql);
+  echo "dataBASE created successfully"."<br>";
+
+}catch(PDOException $err){
+  die("Error". $err->getMessage());
+}   
+// create table with pdo
+//  try{
+//    $sql = " CREATE TABLE users(
+//      id int(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+//      fullname VARCHAR(30) NOT Null,
+//      email VARCHAR(30) NOT NULL UNIQUE
+//    )";
+//    $pdo->exec($sql);
+//    echo "Table created";
+
+//  }catch(PDOException $err){
+//    die("errpr :" .$err->getMessage());
+//  }
+
+try{
+  $sql = "INSERT INTO users(fullname,email)VALUES('okorie chinedu','okorie@gmail.com')";
+  $pdo->exec($sql);
+  echo "record inserted"."<br>";
+}catch(PDOException $err){
+  die("ERROR: " .$err->getMessage());
+}
+
+// inserting from form
+//Attempt insert query execution
+        // try{
+        //     // Create prepared statement
+        //     $sql = "INSERT INTO persons (first_name, last_name, email) VALUES (:first_name, :last_name, :email)";
+        //     $stmt = $pdo->prepare($sql);
+            
+        //     // Bind parameters to statement
+        //     $stmt->bindParam(':first_name', $_REQUEST['first_name']);
+        //     $stmt->bindParam(':last_name', $_REQUEST['last_name']);
+        //     $stmt->bindParam(':email', $_REQUEST['email']);
+            
+        //     // Execute the prepared statement
+        //     $stmt->execute();
+        //     echo "Records inserted successfully.";
+        // } catch(PDOException $e){
+        //     die("ERROR: Could not able to execute $sql. " . $e->getMessage());
+        // }
 
 
+//select query
+        //         // Attempt select query execution
+        // try{
+        //   $sql = "SELECT * FROM persons";   
+        //   $result = $pdo->query($sql);
+        //   if($result->rowCount() > 0){
+        //       echo "<table>";
+        //           echo "<tr>";
+        //               echo "<th>id</th>";
+        //               echo "<th>first_name</th>";
+        //               echo "<th>last_name</th>";
+        //               echo "<th>email</th>";
+        //           echo "</tr>";
+        //       while($row = $result->fetch()){
+        //           echo "<tr>";
+        //               echo "<td>" . $row['id'] . "</td>";
+        //               echo "<td>" . $row['first_name'] . "</td>";
+        //               echo "<td>" . $row['last_name'] . "</td>";
+        //               echo "<td>" . $row['email'] . "</td>";
+        //           echo "</tr>";
+        //       }
+        //       echo "</table>";
+        //       // Free result set
+        //       unset($result);
+        //   } else{
+        //       echo "No records matching your query were found.";
+        //   }
+        // } catch(PDOException $e){
+        //   die("ERROR: Could not able to execute $sql. " . $e->getMessage());
+        // }
 
+
+unset($pdo);
 ?>
   
 </body>
